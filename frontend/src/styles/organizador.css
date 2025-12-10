@@ -1,0 +1,337 @@
+
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --light-bg: #f8f9fa;
+    --dark-text: #343a40;
+    --card-bg: #ffffff;
+    --border-color: #dee2e6;
+    --mobile-width: 450px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    background-color: var(--light-bg);
+    color: var(--dark-text);
+    padding-bottom: 70px; /* Espaço para o menu fixo */
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ==================================== */
+/* 2. Layout e Componentes Comuns */
+/* ==================================== */
+.container {
+    padding: 15px;
+    max-width: var(--mobile-width); /* Prioridade mobile-first */
+    margin: 0 auto;
+}
+
+/* --- Títulos --- */
+h1, h2 {
+    color: var(--dark-text);
+    margin-bottom: 15px;
+}
+
+.subtitle {
+    display: block;
+    color: var(--secondary-color);
+    margin-top: -10px;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+}
+
+/* --- Botões --- */
+.btn {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #1e7e34;
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-outline:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* --- Cartões --- */
+.card {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-bottom: 20px;
+    border-left: 5px solid var(--primary-color);
+}
+
+.card-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.card-info {
+    font-size: 0.9em;
+    color: var(--secondary-color);
+}
+
+.card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.card-actions .btn-sm {
+    flex-grow: 1;
+    padding: 6px 10px;
+    font-size: 0.85em;
+    margin-bottom: 0;
+}
+
+/* --- Formulários --- */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="datetime-local"],
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.form-check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ==================================== */
+/* 3. Menu de Navegação (Fixo Mobile) */
+/* ==================================== */
+.nav-organizador {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--card-bg);
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    z-index: 1000;
+}
+
+.nav-item {
+    text-align: center;
+    font-size: 0.75em;
+    color: var(--secondary-color);
+    flex: 1;
+}
+
+.nav-item a {
+    display: block;
+    color: inherit;
+    padding: 5px;
+}
+
+.nav-item a.active {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.nav-item a i {
+    font-size: 1.5em;
+    display: block;
+    margin-bottom: 2px;
+}
+
+/* ==================================== */
+/* 4. Estilos Específicos */
+/* ==================================== */
+
+/* --- Painel Seus Eventos --- */
+.status-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.status-rascunho { background-color: #adb5bd; color: white; }
+.status-aberto { background-color: var(--success-color); color: white; }
+.status-fechado { background-color: var(--warning-color); color: var(--dark-text); }
+.status-finalizado { background-color: var(--secondary-color); color: white; }
+
+/* --- Gestão de Inscrições --- */
+.inscricao-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.inscricao-details {
+    flex-grow: 1;
+}
+
+.inscricao-status-badge {
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-size: 0.7em;
+    font-weight: bold;
+    color: white;
+}
+
+.status-pendente { background-color: var(--warning-color); }
+.status-aprovada { background-color: var(--success-color); }
+.status-aguardando { background-color: var(--primary-color); }
+.status-recusada { background-color: var(--danger-color); }
+
+.inscricao-actions {
+    display: flex;
+    gap: 5px;
+}
+
+/* --- Painel Check-in --- */
+.checkin-header {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.camera-placeholder {
+    height: 200px;
+    background-color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+.participante-info {
+    border: 1px solid var(--primary-color);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.checkin-counter {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+/* --- Desktop Adaptations (Max-width 768px is a common breakpoint) --- */
+@media (min-width: 768px) {
+    .container {
+        max-width: 800px;
+        padding: 25px;
+    }
+
+    .nav-organizador {
+        position: static;
+        box-shadow: none;
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 20px;
+        padding: 0;
+    }
+
+    .nav-item a {
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
+    
+    .nav-item a i {
+        display: none; /* Oculta ícones no desktop */
+    }
+
+    .btn {
+        width: auto; /* Botões não ocupam 100% no desktop */
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .card-actions {
+        justify-content: flex-end;
+    }
+
+    .card-actions .btn-sm {
+        flex-grow: 0;
+        width: auto;
+    }
+    
+    body {
+        padding-bottom: 0;
+    }
+}

@@ -1,0 +1,132 @@
+:root {
+    --primary-color: #ff9100; /* Azul vibrante para botões e foco */
+    --secondary-color: #6c757d; /* Cinza para texto secundário */
+    --background-light: #f4f7f9; /* Fundo geral claro */
+    --card-background: #ffffff; /* Fundo do container de login */
+    --border-color: #c3d1df; /* Cor da borda do input */
+    --shadow-color: rgba(0, 0, 0, 0.05); /* Sombra suave */
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ----------------------------------- */
+/* Estilos Gerais (Body/Root) */
+/* ----------------------------------- */
+body {
+    font-family: var(--font-family);
+    background-color: var(--background-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box; 
+}
+
+/* ----------------------------------- */
+/* Container Principal de Login */
+/* ----------------------------------- */
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    background-color: var(--card-background);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px var(--shadow-color);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-container:hover {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+/* ----------------------------------- */
+/* Título */
+/* ----------------------------------- */
+.login-container h1 {
+    color: #343a40;
+    margin-bottom: 30px;
+    font-size: 2em;
+    font-weight: 600;
+}
+
+/* ----------------------------------- */
+/* Formulário e Elementos de Input/Label */
+/* ----------------------------------- */
+.login-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espaço entre os elementos do formulário */
+}
+
+.login-container label {
+    text-align: left;
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: 5px;
+    display: block; /* Para garantir que o input venha em uma nova linha */
+}
+
+.login-container input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 1em;
+    color: #343a40;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-container input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Efeito de foco suave */
+    outline: none; /* Remove o outline padrão do navegador */
+}
+
+/* ----------------------------------- */
+/* Botão de Submissão */
+/* ----------------------------------- */
+.login-container button[type="submit"] {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 15px;
+    margin-top: 20px; /* Espaço extra acima do botão */
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    letter-spacing: 0.5px;
+}
+
+.login-container button[type="submit"]:hover {
+    background-color: #0056b3; /* Cor mais escura no hover */
+}
+
+.login-container button[type="submit"]:active {
+    transform: scale(0.99); /* Pequeno efeito de clique */
+}
+
+/* ----------------------------------- */
+/* Mídia Queries para Responsividade */
+/* ----------------------------------- */
+@media (max-width: 500px) {
+    .login-container {
+        padding: 30px 20px;
+        margin: 10px;
+        box-shadow: none; /* Remove a sombra em telas muito pequenas */
+    }
+
+    .login-container h1 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+
+    .login-container input,
+    .login-container button[type="submit"] {
+        padding: 10px;
+    }
+}

@@ -1,0 +1,360 @@
+/* ============================
+   ESTILOS GERAIS
+============================ */
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  margin: 0;
+  padding: 0;
+}
+
+.titulo {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 25px;
+  color: #222;
+}
+
+
+/* ============================
+   CONTAINERS PADRÃO (AUMENTADOS)
+============================ */
+.participante-home,
+.inscrever-container,
+.mensagens-container,
+.avaliar-container {
+  width: 100%;
+  max-width: 1000px;       /* AUMENTADO */
+  margin: 40px auto;
+  padding: 30px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* PERFIL */
+.perfil-container {
+  width: 100%;
+  max-width: 1100px;       /* MAIOR AINDA */
+  margin: 40px auto;
+  padding: 35px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ============================
+   BOTÕES
+============================ */
+.btn-primary,
+.btn-inscrever,
+.btn-enviar {
+  width: 100%;
+  padding: 14px;
+  background: #ff9100;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.btn-primary:hover,
+.btn-inscrever:hover,
+.btn-enviar:hover {
+  background: #ff9100;
+}
+
+/* Salvar Perfil */
+.btn-salvar {
+  padding: 14px;
+  background: #ff9100;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn-salvar:hover {
+  background: #357ac9;
+}
+
+
+/* ============================
+   HOME DO PARTICIPANTE
+============================ */
+.participante-home {
+  max-width: 900px;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.card h2 {
+  margin: 0 0 8px 0;
+}
+
+
+/* ============================
+   PERFIL
+============================ */
+.perfil-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 20px;
+}
+
+.perfil-form label {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.perfil-form input {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+
+/* ============================
+   FORMULÁRIOS EM GERAL
+============================ */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+input,
+select,
+textarea {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+
+/* ============================
+   MENSAGENS
+============================ */
+.mensagem-item {
+  background: #e9eef5;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 12px;
+}
+
+.mensagem-item h3 {
+  margin: 0 0 5px 0;
+}
+
+.data {
+  display: block;
+  font-size: 12px;
+  color: #555;
+  margin-top: 5px;
+}
+
+
+/* ============================
+   AVALIAÇÃO
+============================ */
+.avaliacao-sucesso {
+  text-align: center;
+  padding: 20px;
+}
+
+.avaliacao-sucesso h2 {
+  color: #2e7d32;
+}
+
+
+/* ============================
+   RESPONSIVIDADE
+============================ */
+@media (max-width: 500px) {
+  .perfil-container,
+  .participante-home,
+  .inscrever-container,
+  .avaliar-container,
+  .mensagens-container {
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .titulo {
+    font-size: 22px;
+  }
+}
+
+
+
+
+/* ----------------------------------- */
+/*       Página de Inscrição           */
+/* ----------------------------------- */
+
+/* ----------------------------------- */
+/* Variáveis e Configurações Globais */
+/* ----------------------------------- */
+:root {
+    --primary-color: #ff9100; /* Azul para o botão de inscrição */
+    --primary-hover: #30c951;
+    --background-color: #f8f9fa; /* Fundo cinza muito claro */
+    --card-background: #ffffff; /* Fundo dos cartões */
+    --text-color-dark: #343a40; /* Texto principal escuro */
+    --text-color-medium: #6c757d; /* Texto de descrição e info */
+    --shadow-light: rgba(0, 0, 0, 0.05);
+    --border-radius: 8px;
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* ----------------------------------- */
+/* Container da Página */
+/* ----------------------------------- */
+.part-container {
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.part-content {
+    width: 100%;
+    max-width: 1200px; /* Limite a largura do conteúdo principal */
+}
+
+/* ----------------------------------- */
+/* Título Principal */
+/* ----------------------------------- */
+.part-title {
+    color: var(--text-color-dark);
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.5em;
+    font-weight: 700;
+}
+
+/* ----------------------------------- */
+/* Grid de Eventos */
+/* ----------------------------------- */
+.part-grid {
+    display: grid;
+    /* Padrão para telas grandes: 3 colunas */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px; /* Espaço entre os cartões */
+}
+
+/* ----------------------------------- */
+/* Estilo do Cartão de Evento */
+/* ----------------------------------- */
+.part-event-card {
+    background-color: var(--card-background);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 15px var(--shadow-light);
+    border-left: 5px solid var(--primary-color); /* Borda decorativa lateral */
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.part-event-card:hover {
+    transform: translateY(-5px); /* Efeito sutil de elevação */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.part-event-title {
+    color: var(--primary-color);
+    font-size: 1.5em;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.part-event-desc {
+    color: var(--text-color-medium);
+    margin-bottom: 15px;
+    flex-grow: 1; /* Garante que todos os cards tenham a mesma altura visualmente (se possível) */
+}
+
+.part-event-info {
+    color: var(--text-color-dark);
+    font-weight: 500;
+    margin-bottom: 20px;
+    border-top: 1px solid #f1f1f1;
+    padding-top: 10px;
+}
+
+/* ----------------------------------- */
+/* Botão de Ação */
+/* ----------------------------------- */
+.part-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Ocupa toda a largura do card */
+}
+
+.part-btn:hover {
+    background-color: var(--primary-hover);
+}
+
+/* ----------------------------------- */
+/* Responsividade */
+/* ----------------------------------- */
+@media (max-width: 768px) {
+    .part-title {
+        font-size: 2em;
+        margin-bottom: 30px;
+    }
+    
+    .part-container {
+        padding: 30px 15px;
+    }
+
+    /* Em telas menores, o grid pode ter 1 ou 2 colunas */
+    .part-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+    }
+
+    .part-event-card {
+        padding: 25px;
+    }
+}

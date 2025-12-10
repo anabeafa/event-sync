@@ -1,0 +1,153 @@
+/* ----------------------------------- */
+/* Variáveis de Cores */
+/* ----------------------------------- */
+:root {
+    --primary-orange: #ff9100; /* Laranja principal do botão */
+    --hover-orange: #cc7400; /* Laranja escuro para hover */
+    --background-light: #ffffff; /* Fundo principal: Branco Puro */
+    --card-background: #ffffff; /* Fundo do card */
+    --text-color: #333333;
+    --input-border: #cccccc;
+    --input-focus-shadow: rgba(255, 145, 0, 0.4); /* Sombra suave laranja no foco */
+    --link-color: #007bff; /* Azul padrão para links */
+}
+
+/* ----------------------------------- */
+/* Container Principal da Página */
+/* ----------------------------------- */
+.page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* Fundo Branco */
+    background: var(--background-light); 
+    padding: 20px;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ----------------------------------- */
+/* Estilo do Card (Container do Formulário) */
+/* ----------------------------------- */
+.card {
+    background: var(--card-background);
+    /* Largura restaurada para 380px */
+    width: 380px; 
+    padding: 40px; 
+    border-radius: 12px;
+    /* Sombra mais suave e moderna */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+}
+
+/* ----------------------------------- */
+/* Título */
+/* ----------------------------------- */
+.card h2 {
+    text-align: center;
+    margin-bottom: 30px; 
+    color: var(--text-color);
+    font-size: 1.8em;
+    font-weight: 600;
+}
+
+/* ----------------------------------- */
+/* Formulário e Inputs */
+/* ----------------------------------- */
+.card form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.card input {
+    padding: 14px; 
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    font-size: 1em;
+    color: var(--text-color);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Estilo de foco aprimorado (Laranja) */
+.card input:focus {
+    outline: none;
+    border-color: var(--primary-orange); 
+    box-shadow: 0 0 0 3px var(--input-focus-shadow); 
+}
+
+/* ----------------------------------- */
+/* Botão de Registro (Laranja) */
+/* ----------------------------------- */
+.card button {
+    padding: 14px;
+    background: var(--primary-orange); 
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600; 
+    transition: background 0.3s ease, transform 0.1s ease;
+    margin-top: 5px;
+}
+
+.card button:hover {
+    background: var(--hover-orange); 
+}
+
+.card button:active {
+    transform: scale(0.99); 
+}
+
+/* ----------------------------------- */
+/* Estilo para Link e Texto Inferior */
+/* ----------------------------------- */
+.link-text {
+    text-align: center;
+    margin-top: 25px; 
+    font-size: 0.95em;
+    color: #6c757d; 
+}
+
+.link-text a {
+    color: var(--link-color);
+    text-decoration: none; 
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.link-text a:hover {
+    color: #0056b3; 
+    text-decoration: underline; 
+}
+
+/* ----------------------------------- */
+/* Mídia Queries (Responsividade) */
+/* ----------------------------------- */
+@media (max-width: 500px) {
+    .page-container {
+        align-items: flex-start;
+        padding-top: 40px;
+    }
+    
+    .card {
+        /* Permite que o card ocupe quase toda a largura em telas pequenas */
+        width: 95%; 
+        max-width: none; 
+        margin: 0 10px;
+        padding: 30px 25px;
+        box-shadow: none; 
+        border-radius: 6px;
+    }
+
+    .card h2 {
+        font-size: 1.6em;
+        margin-bottom: 20px;
+    }
+}

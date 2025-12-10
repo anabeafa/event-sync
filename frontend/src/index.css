@@ -1,0 +1,16 @@
+/* ===== RESET GLOBAL ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== AJUSTE GLOBAL DO PROJETO ===== */
+body {
+  background: #f1f1f1;
+  display: flex;
+  justify-content: center;   /* CENTRALIZA HORIZONTALMENTE */
+  padding: 40px 0;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+}
