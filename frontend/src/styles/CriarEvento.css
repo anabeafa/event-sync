@@ -1,0 +1,192 @@
+/* frontend/src/styles/CriarEvento.css */
+
+/* Definição de Cores e Tipografia (Ajuste conforme o tema do seu LayoutOrganizador) */
+:root {
+    --primary-color: #007bff; /* Azul vibrante para botões e foco */
+    --secondary-color: #6c757d; /* Cinza para bordas e textos secundários */
+    --success-color: #28a745; /* Verde para sucesso */
+    --warning-color: #ffc107; /* Amarelo para destaque (pagamento) */
+    --background-light: #f8f9fa; /* Fundo leve */
+    --card-background: #ffffff; /* Fundo do formulário */
+    --text-color: #343a40; /* Cor principal do texto */
+    --border-radius: 8px;
+    --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* --------------------------------------
+   1. ESTILOS DO CONTEÚDO PRINCIPAL
+-------------------------------------- */
+
+.criar-evento-container {
+    /* Certifique-se de que este container envolve o conteúdo principal do seu LayoutOrganizador */
+    padding: 30px;
+    background-color: var(--background-light);
+    min-height: 100vh;
+}
+
+.criar-evento-container h1 {
+    color: var(--text-color);
+    font-size: 2em;
+    margin-bottom: 5px;
+    border-left: 5px solid var(--primary-color);
+    padding-left: 10px;
+}
+
+.criar-evento-container .subtitle {
+    display: block;
+    color: var(--secondary-color);
+    margin-bottom: 25px;
+    font-size: 0.9em;
+}
+
+/* Estilo para as mensagens de feedback */
+.feedback-message {
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+    font-weight: bold;
+    border: 1px solid;
+}
+
+.feedback-message.success {
+    background-color: #d4edda;
+    color: var(--success-color);
+    border-color: #c3e6cb;
+}
+
+.feedback-message.error {
+    background-color: #f8d7da;
+    color: #dc3545;
+    border-color: #f5c6cb;
+}
+
+/* --------------------------------------
+   2. ESTILOS DO FORMULÁRIO (Card Principal)
+-------------------------------------- */
+
+.evento-form {
+    background-color: var(--card-background);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+}
+
+.evento-form h2 {
+    color: var(--primary-color);
+    font-size: 1.5em;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--background-light); /* Sublinhado sutil */
+}
+
+/* --------------------------------------
+   3. ESTILOS DOS CAMPOS (Form Group)
+-------------------------------------- */
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-color);
+    font-size: 0.95em;
+}
+
+.form-group input:not([type="checkbox"]), 
+.form-group textarea, 
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    box-sizing: border-box; /* Garante que padding não estoure a largura */
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus, 
+.form-group textarea:focus, 
+.form-group select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* --------------------------------------
+   4. ESTILOS DE CONFIGURAÇÃO AVANÇADA
+-------------------------------------- */
+
+#config-pagamento {
+    border: 1px solid var(--warning-color) !important; 
+    background-color: #fffde7; /* Amarelo claro para destacar */
+    padding: 15px;
+    border-radius: var(--border-radius);
+    margin-top: 15px;
+}
+
+/* Estilo para Checkboxes/Rádios */
+.form-check {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.form-check input[type="checkbox"] {
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary-color); /* Muda a cor do checkbox nativo */
+}
+
+.form-check label {
+    font-weight: normal;
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+/* --------------------------------------
+   5. BOTÃO PRINCIPAL
+-------------------------------------- */
+
+.btn-primary {
+    display: inline-block;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    font-weight: 700;
+    color: var(--card-background); /* Texto branco */
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+    width: 100%; /* Botão em toda a largura */
+    margin-top: 30px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Azul mais escuro no hover */
+}
+
+.btn-primary i {
+    margin-right: 8px;
+}
+
+/* --------------------------------------
+   6. SEPARADOR
+-------------------------------------- */
+
+hr {
+    border: 0;
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 30px 0;
+}
