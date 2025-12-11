@@ -4,16 +4,13 @@ import { Evento } from '../domain/Evento.js';
 
 export class EventService {
     
-    // 🛑 Recebe o EventRepository por injeção
+    // Recebe o EventRepository por injeção
     constructor(eventRepository) {
         this.eventRepository = eventRepository;
     }
 
     /**
      * Cria um novo evento, com validações de dados.
-     * @param {object} data - Dados do evento (title, description, date, location).
-     * @param {string} organizadorId - ID do usuário que está criando o evento.
-     * @returns {Evento} - O objeto Evento criado.
      */
     async createEvent(data, organizadorId) {
         const { title, description, date, location } = data;
@@ -47,6 +44,32 @@ export class EventService {
 
         return newEvent;
     }
+    
+    /**
+     * 🛑 NOVA FUNÇÃO: Registra a inscrição de um participante em um evento.
+     * Usa 'usuarioId' para corresponder ao seu schema.prisma.
+     */
+    async enrollParticipant(usuarioId, eventoId) {
+        
+        // 1. REGRA DE NEGÓCIO: Verificar se o usuário já está inscrito.
+        // O Repositório cuida da busca pela chave composta (usuarioId + eventoId)
+        const alreadyEnrolled = await this.eventRepository.findEnrollment(usuarioId, eventoId);
+        
+        if (alreadyEnrolled) {
+            // Se o Repositório encontrar, significa que a inscrição já existe.
+            throw new Error("Você já está inscrito(a) neste evento.");
+        }
 
-    // Futuros métodos: listEvents, getEventDetails, updateEvent
+        // 2. Criação do Objeto de Inscrição (Enrollment)
+        const enrollmentData = {
+            usuarioId, // Nome do campo conforme seu schema.prisma
+            eventoId,  // Nome do campo conforme seu schema.prisma
+            status: 'PENDENTE', // Usando 'PENDENTE' como padrão do seu schema
+        };
+        
+        // 3. Salvar no Repositório
+        const enrollment = await this.eventRepository.createEnrollment(enrollmentData);
+        
+        return enrollment;
+    }
 }

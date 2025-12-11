@@ -1,78 +1,92 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// backend/src/repositories/PrismaEventRepository.js 
 
-// 1. CONFIGURAÇÃO DO BANCO DE DADOS (SQLite)
-datasource db {
-  provider = "sqlite"
-  // A URL aponta para o arquivo dev.db na raiz da pasta backend
-  url      = env("DATABASE_URL") 
-}
+import { EventRepository } from '../domain/EventRepository.js'; 
+import { Evento } from '../domain/Evento.js'; 
 
-generator client {
-  provider = "prisma-client-js"
-}
+export class PrismaEventRepository extends EventRepository {
 
+    constructor(prismaInstance) {
+        super(); 
+        this.prisma = prismaInstance; 
+    }
 
-// ====================================================================
-// 2. MODELOS (IDS AJUSTADOS PARA UUID)
-// O SQLite não suporta ObjectId, então usamos String e UUID
-// ====================================================================
+    toDomain(prismaEvent) {
+        if (!prismaEvent) return null;
+        
+        return new Evento(
+            prismaEvent.id,
+            prismaEvent.titulo,  
+            prismaEvent.descricao, 
+            prismaEvent.dataHora, 
+            prismaEvent.local,    
+            prismaEvent.organizadorId,
+            prismaEvent.capacidadeMax
+        );
+    }
+    
+    async create(eventData) {
+        const { title, description, date, location, organizadorId } = eventData; 
 
-model Usuario {
-  // ID ajustado para UUID (String)
-  id               String      @id @default(uuid())
-  name             String
-  email            String      @unique
-  password         String      // Hash da senha
-  isOrganizador    Boolean     @default(false)
-  
-  // Relacionamentos
-  eventosCriados   Evento[]
-  inscricoes       Inscricao[]
-  certificados     Certificado[]
-}
+        try {
+            const prismaEvent = await this.prisma.evento.create({
+                data: {
+                    titulo: title,      
+                    dataHora: date,      
+                    local: location,      
+                    descricao: description, 
+                    organizadorId: organizadorId,
+                    capacidadeMax: 1000, 
+                },
+            });
 
-model Evento {
-  // ID ajustado para UUID (String)
-  id               String      @id @default(uuid())
-  titulo           String
-  descricao        String?
-  dataHora         DateTime
-  local            String
-  capacidadeMax    Int
-  
-  // Relacionamento com o criador (Organizador)
-  organizadorId    String
-  organizador      Usuario     @relation(fields: [organizadorId], references: [id])
-  
-  // Relacionamentos com Inscrições
-  inscricoes       Inscricao[]
-}
+            return this.toDomain(prismaEvent);
+        } catch (error) {
+            console.error("ERRO CRÍTICO NO REPOSITÓRIO:", error);
+            throw new Error(error.message || "Falha ao salvar evento no banco de dados.");
+        }
+    }
+    
+    /**
+     * 🛑 NOVO MÉTODO: Busca uma inscrição existente, usando usuarioId e eventoId.
+     */
+    async findEnrollment(usuarioId, eventoId) { // Nomes ajustados para o schema
+        const enrollment = await this.prisma.inscricao.findUnique({
+            where: {
+                // A chave composta única no seu schema é [usuarioId, eventoId]
+                usuarioId_eventoId: { 
+                    usuarioId: usuarioId,
+                    eventoId: eventoId,
+                }
+            },
+        });
+        
+        return enrollment; 
+    }
 
-model Inscricao {
-  // ID ajustado para UUID (String)
-  id               String      @id @default(uuid())
-  dataInscricao    DateTime    @default(now())
-  status           String      @default("PENDENTE") // PENDENTE, CONFIRMADO, CANCELADO
-  
-  // Relacionamento com o Usuário
-  usuarioId        String
-  usuario          Usuario     @relation(fields: [usuarioId], references: [id])
-  
-  // Relacionamento com o Evento
-  eventoId         String
-  evento           Evento      @relation(fields: [eventoId], references: [id])
-  
-  @@unique([usuarioId, eventoId]) // Garante que um usuário só se inscreva uma vez por evento
-}
+    /**
+     * 🛑 NOVO MÉTODO: Cria um novo registro de inscrição.
+     */
+    async createEnrollment(enrollmentData) {
+        // Nomes ajustados para o schema:
+        const { usuarioId, eventoId, status } = enrollmentData;
+        
+        try {
+            const newEnrollment = await this.prisma.inscricao.create({
+                data: {
+                    usuarioId: usuarioId,
+                    eventoId: eventoId,
+                    status: status,
+                },
+            });
 
-model Certificado {
-  // ID ajustado para UUID (String)
-  id               String      @id @default(uuid())
-  codigoValidacao  String      @unique
-  dataEmissao      DateTime    @default(now())
-  
-  // Relacionamento com o Usuário (Participante)
-  usuarioId        String
-  usuario          Usuario     @relation(fields: [usuarioId], references: [id])
+            return newEnrollment;
+        } catch (error) {
+            // Captura erro de chave única (usuário já inscrito)
+            if (error.code === 'P2002') { 
+                throw new Error("Você já está inscrito(a) neste evento.");
+            }
+            console.error("ERRO CRÍTICO ao criar inscrição:", error);
+            throw new Error("Falha ao registrar inscrição no banco de dados.");
+        }
+    }
 }

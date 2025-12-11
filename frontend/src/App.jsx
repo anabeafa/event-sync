@@ -32,7 +32,8 @@ export default function App() {
         <Route path="/register" element={<Register />} />
 
         {/* ROTAS DO PARTICIPANTE */}
-        <Route path="/" element={<ParticipanteHome />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/home" element={<ParticipanteHome />} />
         <Route path="/perfil" element={<Perfil />} />
         <Route path="/inscrever" element={<InscreverEvento />} />
         <Route path="/mensagens" element={<Mensagens />} />

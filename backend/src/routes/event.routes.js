@@ -35,15 +35,19 @@ export default function eventRoutesFactory(prisma, userRepository) {
     
     const router = Router();
 
-    // Rota de Criação de Evento:
-    // 1. protect: Verifica se está logado e injeta req.user
-    // 2. isOrganizador: Verifica se req.user.isOrganizador é true
-    // 3. eventController.create: Executa a lógica
+    // Rota de Criação de Evento: POST /api/eventos
     router.post(
         '/', 
         protect, 
         isOrganizador, 
         (req, res) => eventController.create(req, res)
+    );
+
+    // 🛑 NOVA ROTA: Inscrição em Evento: POST /api/eventos/inscrever
+    router.post(
+        '/inscrever', 
+        protect, 
+        (req, res) => eventController.enroll(req, res) // Chama a nova função 'enroll'
     );
 
     // Futuras rotas:

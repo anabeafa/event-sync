@@ -1,7 +1,10 @@
-import { useNavigate } from "react-router-dom";
+// frontend/src/pages/Login.jsx 
+
+import { useNavigate, Link } from "react-router-dom"; 
 import { useState } from "react";
-import "../../styles/login.css";
+import "../../styles/register.css"; 
 import { login } from "../../services/authService"; 
+
 
 export default function Login() {
   const navigate = useNavigate();
@@ -16,54 +19,80 @@ export default function Login() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => { 
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError(""); 
 
     try {
-   
-      const data = await login(form.email, form.password);
+      const response = await login(form.email, form.password);
       
-      if (data && data.user && data.user.isOrganizador) {
-
+      alert(response.message || "Login realizado com sucesso!");
+      
+      // LÓGICA CRÍTICA DE REDIRECIONAMENTO CORRIGIDA E ROBUSTA
+      // Pega o 'role' que agora vem corretamente do Back-end
+      const userRole = response.user.role ? response.user.role.toUpperCase() : '';
+      
+      if (userRole === 'ORGANIZADOR') {
+        // Redireciona para o painel do organizador
         navigate("/organizador/criarevento"); 
       } else {
-        navigate("/"); 
+        // Redireciona para a home do participante
+        navigate("/home"); 
       }
 
     } catch (err) {
-      console.error("Erro no login:", err);
-      setError(err.message || "Falha ao conectar. Tente novamente."); 
+      console.error("Erro ao logar:", err);
+      setError(err.message || "Credenciais inválidas ou erro ao entrar."); 
     }
   };
 
   return (
-    <div className="login-container">
-      <h1>Login</h1>
-
-      <form onSubmit={handleSubmit}>
-        {error && <p className="error-message">{error}</p>} 
+    <div className="split-container"> 
+      
+      {/* PAINEL ESQUERDO: Título e Enfeites */}
+      <div className="left-panel">
+        <h1 className="main-title">EVENTSYNC</h1>
         
-        <label>Email</label>
-        <input 
-          type="email" 
-          name="email"
-          value={form.email}
-          onChange={handleChange}
-          required
-        />
+        {/* CORREÇÃO DA COR: Usando estilo inline para garantir o branco */}
+        <h2 className="subtitle" style={{ color: 'white' }}>Entre e Gerencie Seus Eventos.</h2>
+        
+        <div className="decoration-line"></div>
+      </div>
 
-        <label>Senha</label>
-        <input 
-          type="password"
-          name="password"
-          value={form.password}
-          onChange={handleChange}
-          required
-        />
+      {/* PAINEL DIREITO: Formulário de Login */}
+      <div className="right-panel">
+        <div className="register-card">
+          <h2>Acesso à Conta</h2>
+          
+          <form onSubmit={handleSubmit}>
+            {error && <p className="error-message">{error}</p>}
+            
+            <input 
+              type="email" 
+              name="email"
+              placeholder="E-mail"
+              value={form.email}
+              onChange={handleChange}
+              required
+            />
 
-        <button type="submit">Entrar</button>
-      </form>
+            <input 
+              type="password"
+              name="password"
+              placeholder="Senha"
+              value={form.password}
+              onChange={handleChange}
+              required
+            />
+
+            <button type="submit">Entrar</button>
+          </form>
+
+          <p className="link-text">
+            Não tem conta? <Link to="/register">Criar Conta</Link>
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

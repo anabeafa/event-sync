@@ -1,153 +1,159 @@
-/* ----------------------------------- */
-/* Variáveis de Cores */
-/* ----------------------------------- */
-:root {
-    --primary-orange: #ff9100; /* Laranja principal do botão */
-    --hover-orange: #cc7400; /* Laranja escuro para hover */
-    --background-light: #ffffff; /* Fundo principal: Branco Puro */
-    --card-background: #ffffff; /* Fundo do card */
-    --text-color: #333333;
-    --input-border: #cccccc;
-    --input-focus-shadow: rgba(255, 145, 0, 0.4); /* Sombra suave laranja no foco */
-    --link-color: #007bff; /* Azul padrão para links */
+.split-container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
 }
 
-/* ----------------------------------- */
-/* Container Principal da Página */
-/* ----------------------------------- */
-.page-container {
+.left-panel {
+    flex: 1; 
+    background: linear-gradient(-45deg, #FF7300, #e66500, #FF7300); 
+    background-size: 400% 400%; 
+    animation: gradient-wave 15s ease infinite; 
+    color: #FFFFFF; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    text-align: center;
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 80% 100%, 0% 100%);
+}
+
+
+/*
+
+.left-panel {
+    flex: 1; 
+    background-color: #FF7300; 
+    color: #ffffff; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    text-align: center;
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 80% 100%, 0% 100%);
+} */
+
+.main-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-top: 0;
+    color: #FFFFFF !important; 
+    text-shadow: none !important; 
+}
+
+.decoration-line {
+    width: 60px;
+    height: 4px;
+    background-color: #FFFFFF;
+    margin-top: 20px;
+}
+
+.right-panel {
+    flex: 1;
+    background-color: #1a5cc0;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    /* Fundo Branco */
-    background: var(--background-light); 
-    padding: 20px;
+}
+
+.register-card {
+    background-color: #FFFFFF;
+    padding: 40px 50px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* ----------------------------------- */
-/* Estilo do Card (Container do Formulário) */
-/* ----------------------------------- */
-.card {
-    background: var(--card-background);
-    /* Largura restaurada para 380px */
-    width: 380px; 
-    padding: 40px; 
-    border-radius: 12px;
-    /* Sombra mais suave e moderna */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    transition: box-shadow 0.3s ease;
-}
-
-.card:hover {
-     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
-}
-
-/* ----------------------------------- */
-/* Título */
-/* ----------------------------------- */
-.card h2 {
+.register-card h2 {
+    color: #343A40;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    border-bottom: 2px solid #FF7300; 
+    padding-bottom: 10px;
     text-align: center;
-    margin-bottom: 30px; 
-    color: var(--text-color);
-    font-size: 1.8em;
-    font-weight: 600;
 }
 
-/* ----------------------------------- */
-/* Formulário e Inputs */
-/* ----------------------------------- */
-.card form {
+.register-card input[type="text"],
+.register-card input[type="email"],
+.register-card input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da; 
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.checkbox-group {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-.card input {
-    padding: 14px; 
-    border: 1px solid var(--input-border);
-    border-radius: 8px;
-    font-size: 1em;
-    color: var(--text-color);
-    transition: border-color 0.3s, box-shadow 0.3s;
+.checkbox-group label {
+    margin-left: 10px;
+    color: #343A40;
+    font-size: 14px;
 }
 
-/* Estilo de foco aprimorado (Laranja) */
-.card input:focus {
-    outline: none;
-    border-color: var(--primary-orange); 
-    box-shadow: 0 0 0 3px var(--input-focus-shadow); 
-}
-
-/* ----------------------------------- */
-/* Botão de Registro (Laranja) */
-/* ----------------------------------- */
-.card button {
-    padding: 14px;
-    background: var(--primary-orange); 
-    color: white;
+.register-card button[type="submit"] {
+    width: 100%;
+    background-color: #FF7300;
+    color: #FFFFFF;
+    padding: 12px 20px;
+    margin-top: 10px;
     border: none;
-    border-radius: 8px;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 1.1em;
-    font-weight: 600; 
-    transition: background 0.3s ease, transform 0.1s ease;
-    margin-top: 5px;
+    font-size: 18px;
+    transition: background-color 0.3s;
 }
 
-.card button:hover {
-    background: var(--hover-orange); 
+.register-card button[type="submit"]:hover {
+    background-color: #37923b; 
 }
 
-.card button:active {
-    transform: scale(0.99); 
+.error-message {
+    color: #dc3545; 
+    margin-bottom: 15px;
+    text-align: center;
 }
 
-/* ----------------------------------- */
-/* Estilo para Link e Texto Inferior */
-/* ----------------------------------- */
 .link-text {
     text-align: center;
-    margin-top: 25px; 
-    font-size: 0.95em;
-    color: #6c757d; 
+    margin-top: 20px;
+    font-size: 14px;
+    color: #343A40;
 }
 
 .link-text a {
-    color: var(--link-color);
-    text-decoration: none; 
+    color: #FF7300; 
+    text-decoration: none;
     font-weight: 600;
-    transition: color 0.2s ease;
 }
 
-.link-text a:hover {
-    color: #0056b3; 
-    text-decoration: underline; 
-}
-
-/* ----------------------------------- */
-/* Mídia Queries (Responsividade) */
-/* ----------------------------------- */
-@media (max-width: 500px) {
-    .page-container {
-        align-items: flex-start;
-        padding-top: 40px;
+@keyframes gradient-wave {
+    0% {
+        background-position: 0% 50%;
     }
-    
-    .card {
-        /* Permite que o card ocupe quase toda a largura em telas pequenas */
-        width: 95%; 
-        max-width: none; 
-        margin: 0 10px;
-        padding: 30px 25px;
-        box-shadow: none; 
-        border-radius: 6px;
+    50% {
+        background-position: 100% 50%;
     }
-
-    .card h2 {
-        font-size: 1.6em;
-        margin-bottom: 20px;
+    100% {
+        background-position: 0% 50%;
     }
 }

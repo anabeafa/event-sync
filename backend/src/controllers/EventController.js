@@ -12,14 +12,12 @@ export class EventController {
      * Cria um novo evento (Apenas para organizadores).
      */
     async create(req, res) {
-        // O req.user foi injetado pelo seu middleware 'protect'
         const organizadorId = req.user.id;
         const eventData = req.body; 
 
         try {
             const newEvent = await this.eventService.createEvent(eventData, organizadorId);
 
-            // Resposta de sucesso (201 Created)
             return res.status(201).json({
                 message: "Evento criado com sucesso!",
                 event: {
@@ -33,19 +31,47 @@ export class EventController {
         } catch (error) {
             console.error("Erro ao criar evento:", error.message);
             
-            // 🛑 CORREÇÃO: Tratar qualquer erro de lógica/repositório vindo do Service como 400, 
-            // e mostrar a mensagem de erro exata (incluindo o erro do Prisma)
             if (error.message) {
-                // Se for um erro vindo do EventService/Prisma, trate como 400 Bad Request.
-                // Isso inclui erros de campo obrigatório, data no passado, etc.
-                // Isso vai forçar a mensagem "Argument X is missing" a aparecer no Front-end.
                 return res.status(400).json({ message: error.message });
             }
             
-            // 500 Erro Interno do Servidor (apenas para falhas não previstas)
             return res.status(500).json({ message: "Erro interno do servidor." });
         }
     }
     
-    // Futuros métodos: listAll, getDetails
+    /**
+     * Rota POST /api/eventos/inscrever
+     * Registra o usuário logado (Participante) em um evento.
+     */
+    async enroll(req, res) {
+        // ID do usuário logado (Participante)
+        const participanteId = req.user.id; 
+        
+        // ID do evento vindo do Front-end
+        const { eventId } = req.body; 
+
+        if (!eventId) {
+            return res.status(400).json({ message: "O ID do evento é obrigatório para a inscrição." });
+        }
+
+        try {
+            // 🛑 Chama a nova função no EventService para registrar a inscrição
+            const enrollment = await this.eventService.enrollParticipant(participanteId, eventId);
+
+            // Resposta de sucesso (201 Created)
+            return res.status(201).json({
+                message: "Inscrição realizada com sucesso!",
+                enrollment: enrollment
+            });
+            
+        } catch (error) {
+            console.error("Erro ao inscrever-se no evento:", error.message);
+            
+            if (error.message) {
+                return res.status(400).json({ message: error.message });
+            }
+            
+            return res.status(500).json({ message: "Erro interno do servidor ao inscrever-se." });
+        }
+    }
 }

@@ -1,3 +1,5 @@
+// frontend/src/pages/Register.jsx 
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"; 
 import "../../styles/register.css";
@@ -46,54 +48,62 @@ export default function Register() {
   };
 
   return (
-    <div className="page-container">
-      <div className="card">
-        <h2>Criar Conta</h2>
+   
+    <div className="split-container"> 
+      <div className="left-panel">
+        <h1 className="main-title">EVENTSYNC</h1>
+        <h2 className="subtitle">Gerencie e Participe dos Melhores Eventos.</h2>
+        <div className="decoration-line"></div>
+      </div>
+      <div className="right-panel">
+        <div className="register-card"> 
+          <h2>Criar Conta</h2>
 
-        <form onSubmit={handleSubmit}>
-          {error && <p className="error-message">{error}</p>}
-          
-          <input
-            type="text"
-            name="name"
-            placeholder="Nome completo"
-            onChange={handleChange}
-            required
-          />
-
-          <input
-            type="email"
-            name="email"
-            placeholder="E-mail"
-            onChange={handleChange}
-            required
-          />
-
-          <input
-            type="password"
-            name="password"
-            placeholder="Senha"
-            onChange={handleChange}
-            required
-          />
-
-          <div className="checkbox-group">
+          <form onSubmit={handleSubmit}>
+            {error && <p className="error-message">{error}</p>}
+            
             <input
-              type="checkbox"
-              name="isOrganizador"
-              id="isOrganizador"
-              checked={form.isOrganizador}
+              type="text"
+              name="name"
+              placeholder="Nome completo"
               onChange={handleChange}
+              required
             />
-            <label htmlFor="isOrganizador">Sou um Organizador de Eventos</label>
-          </div>
 
-          <button type="submit">Registrar</button>
-        </form>
+            <input
+              type="email"
+              name="email"
+              placeholder="E-mail"
+              onChange={handleChange}
+              required
+            />
 
-        <p className="link-text">
-          Já tem conta? <Link to="/login">Entrar</Link>
-        </p>
+            <input
+              type="password"
+              name="password"
+              placeholder="Senha"
+              onChange={handleChange}
+              required
+            />
+
+            <div className="checkbox-group">
+              <input
+                type="checkbox"
+                name="isOrganizador"
+                id="isOrganizador"
+                checked={form.isOrganizador}
+                onChange={handleChange}
+              />
+              <label htmlFor="isOrganizador">Sou um Organizador de Eventos</label>
+            </div>
+
+            <button type="submit">Registrar</button>
+          </form>
+
+          <p className="link-text">
+            Já tem conta? <Link to="/login">Entrar</Link>
+          </p>
+        </div>
       </div>
     </div>
   );
