@@ -1,29 +1,47 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import axios from "../../services/api";
+import { Link, useNavigate } from "react-router-dom"; 
 import "../../styles/register.css";
+import { register } from "../../services/authService"; 
 
 export default function Register() {
   const [form, setForm] = useState({
     name: "",
     email: "",
-    password: ""
+    password: "",
+    isOrganizador: false 
   });
+ 
+  const [error, setError] = useState(""); 
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    setForm({ ...form, [e.target.name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
 
     try {
-      const response = await axios.post("/auth/register", form);
-      alert("Conta criada com sucesso!");
-      console.log(response.data);
-    } catch (error) {
-      alert("Erro ao registrar.");
-      console.error(error);
+      const response = await register(
+        form.name, 
+        form.email, 
+        form.password, 
+        form.isOrganizador
+      );
+      
+      alert(response.message || "Conta criada com sucesso! Você já está logado.");
+      
+      if (form.isOrganizador) {
+        navigate("/organizador/criarevento"); 
+      } else {
+        navigate("/"); 
+      }
+
+    } catch (err) {
+      console.error("Erro ao registrar:", err);
+      setError(err.message || "Erro ao criar conta. Verifique seus dados."); 
     }
   };
 
@@ -33,6 +51,8 @@ export default function Register() {
         <h2>Criar Conta</h2>
 
         <form onSubmit={handleSubmit}>
+          {error && <p className="error-message">{error}</p>}
+          
           <input
             type="text"
             name="name"
@@ -56,6 +76,17 @@ export default function Register() {
             onChange={handleChange}
             required
           />
+
+          <div className="checkbox-group">
+            <input
+              type="checkbox"
+              name="isOrganizador"
+              id="isOrganizador"
+              checked={form.isOrganizador}
+              onChange={handleChange}
+            />
+            <label htmlFor="isOrganizador">Sou um Organizador de Eventos</label>
+          </div>
 
           <button type="submit">Registrar</button>
         </form>

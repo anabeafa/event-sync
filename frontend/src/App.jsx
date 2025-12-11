@@ -10,6 +10,7 @@ import Perfil from "./pages/participante/Perfil";
 import InscreverEvento from "./pages/participante/InscreverEvento";
 import Mensagens from "./pages/participante/Mensagens";
 import AvaliarEvento from "./pages/participante/AvaliarEvento";
+import SuasInscricoes from "./pages/participante/SuasInscricoes";
 
 
 // ORGANIZADOR
@@ -36,10 +37,13 @@ export default function App() {
         <Route path="/inscrever" element={<InscreverEvento />} />
         <Route path="/mensagens" element={<Mensagens />} />
         <Route path="/avaliar" element={<AvaliarEvento />} />
+        <Route path="/inscricoes" element={<SuasInscricoes />} />
+        
 
         {/* ROTAS DO ORGANIZADOR*/}
         <Route path="/organizador/criarevento" element={<CriarEvento />} />
         <Route path="/organizador/comunicacao" element={<Comunicacao />} />
+
          {/* <Route path="/organizador/checkin" element={<CheckIn />} />
         <Route path="/organizador/ConfigurarCertificado" element={<ConfigurarCertificado />} />
         <Route path="/organizador/Dashboard" element={<Dashboard/>} />

@@ -1,0 +1,78 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// 1. CONFIGURAÇÃO DO BANCO DE DADOS (SQLite)
+datasource db {
+  provider = "sqlite"
+  // A URL aponta para o arquivo dev.db na raiz da pasta backend
+  url      = env("DATABASE_URL") 
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+
+// ====================================================================
+// 2. MODELOS (IDS AJUSTADOS PARA UUID)
+// O SQLite não suporta ObjectId, então usamos String e UUID
+// ====================================================================
+
+model Usuario {
+  // ID ajustado para UUID (String)
+  id               String      @id @default(uuid())
+  name             String
+  email            String      @unique
+  password         String      // Hash da senha
+  isOrganizador    Boolean     @default(false)
+  
+  // Relacionamentos
+  eventosCriados   Evento[]
+  inscricoes       Inscricao[]
+  certificados     Certificado[]
+}
+
+model Evento {
+  // ID ajustado para UUID (String)
+  id               String      @id @default(uuid())
+  titulo           String
+  descricao        String?
+  dataHora         DateTime
+  local            String
+  capacidadeMax    Int
+  
+  // Relacionamento com o criador (Organizador)
+  organizadorId    String
+  organizador      Usuario     @relation(fields: [organizadorId], references: [id])
+  
+  // Relacionamentos com Inscrições
+  inscricoes       Inscricao[]
+}
+
+model Inscricao {
+  // ID ajustado para UUID (String)
+  id               String      @id @default(uuid())
+  dataInscricao    DateTime    @default(now())
+  status           String      @default("PENDENTE") // PENDENTE, CONFIRMADO, CANCELADO
+  
+  // Relacionamento com o Usuário
+  usuarioId        String
+  usuario          Usuario     @relation(fields: [usuarioId], references: [id])
+  
+  // Relacionamento com o Evento
+  eventoId         String
+  evento           Evento      @relation(fields: [eventoId], references: [id])
+  
+  @@unique([usuarioId, eventoId]) // Garante que um usuário só se inscreva uma vez por evento
+}
+
+model Certificado {
+  // ID ajustado para UUID (String)
+  id               String      @id @default(uuid())
+  codigoValidacao  String      @unique
+  dataEmissao      DateTime    @default(now())
+  
+  // Relacionamento com o Usuário (Participante)
+  usuarioId        String
+  usuario          Usuario     @relation(fields: [usuarioId], references: [id])
+}

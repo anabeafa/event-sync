@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "../../styles/login.css";
-
-
+import { login } from "../../services/authService"; 
 
 export default function Login() {
   const navigate = useNavigate();
-
+  const [error, setError] = useState(""); 
+  
   const [form, setForm] = useState({
     email: "",
     password: ""
@@ -16,12 +16,25 @@ export default function Login() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => { 
     e.preventDefault();
+    setError(""); 
 
-    // Aqui você pode validar o login, chamar API etc.
-    // Se estiver tudo certo → redireciona para a Home do participante.
-    navigate("/");
+    try {
+   
+      const data = await login(form.email, form.password);
+      
+      if (data && data.user && data.user.isOrganizador) {
+
+        navigate("/organizador/criarevento"); 
+      } else {
+        navigate("/"); 
+      }
+
+    } catch (err) {
+      console.error("Erro no login:", err);
+      setError(err.message || "Falha ao conectar. Tente novamente."); 
+    }
   };
 
   return (
@@ -29,6 +42,8 @@ export default function Login() {
       <h1>Login</h1>
 
       <form onSubmit={handleSubmit}>
+        {error && <p className="error-message">{error}</p>} 
+        
         <label>Email</label>
         <input 
           type="email" 

@@ -358,3 +358,138 @@ body {
         padding: 25px;
     }
 }
+
+
+/* No seu arquivo participante.css */
+
+/* Faz com que o componente Link funcione como um bloco */
+.card-link {
+    text-decoration: none; /* Remove sublinhado do link */
+    color: inherit; /* Mantém a cor original do texto */
+    display: block; /* Garante que o link ocupe toda a largura */
+    margin-bottom: 15px; /* Adiciona espaço entre os cartões */
+}
+
+/* Opcional: Adiciona um efeito de hover para indicar que é clicável */
+.card-link:hover .card {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+/* Garanta que o estilo do seu .card original permaneça */
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Container de Inscrições */
+.part-inscricao-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.part-inscricao-card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    border-left: 5px solid #007bff; /* Cor padrão */
+}
+
+.part-inscricao-title {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.part-inscricao-date {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+/* Badge de Status */
+.part-status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 0.85em;
+    margin-bottom: 15px;
+    color: white;
+}
+
+/* Cores de Status */
+.status-aprovada {
+    background-color: #28a745; /* Verde */
+}
+
+.status-pendente, .status-aguardando-pagamento {
+    background-color: #ffc107; /* Amarelo */
+    color: #333;
+}
+
+.status-cancelada {
+    background-color: #dc3545; /* Vermelho */
+}
+
+/* Ações */
+.part-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.part-btn-small {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9em;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+}
+
+.part-btn-small:hover {
+    background-color: #0056b3;
+}
+
+.part-btn-cancel {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.part-btn-pay {
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.part-link-detalhes {
+    color: #007bff;
+    text-decoration: none;
+    align-self: center;
+    font-size: 0.9em;
+    padding: 8px 0;
+}
+
+.part-link-detalhes:hover {
+    text-decoration: underline;
+}
