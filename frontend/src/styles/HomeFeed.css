@@ -1,0 +1,243 @@
+/* frontend/src/styles/HomeFeed.css (CHAMATIVO MELHORADO E CENTRALIZADO) */
+
+:root {
+    --primary-color: #180dad; /* Púrpura Elegante */
+    --secondary-color: #ffc107; /* Amarelo/Dourado */
+    --background-color: #f0f2f5; /* Fundo suave */
+    --text-color: #2c3e50;
+    --card-bg: white;
+}
+
+/* 1. Reset e Layout Geral */
+.home-feed-page-wrapper {
+    min-height: 100vh;
+    background-color: var(--background-color);
+}
+
+/* 2. Cabeçalho (Navbar/Auth) */
+.feed-header-login {
+    background-color: #FF7300; 
+    color: white;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.feed-title .auth-link {
+    color: white;
+    text-decoration: none;
+    font-size: 1.8em;
+    font-weight: 800;
+}
+
+.auth-links {
+    display: flex;
+    gap: 15px;
+}
+
+.auth-link {
+    color: white;
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+}
+
+.auth-login {
+    background-color: rgb(28, 133, 194); 
+    color: #f0f2f5;
+    border-color: white;
+}
+
+.auth-cadastro {
+    background-color: rgb(28, 133, 194); 
+    color: #f0f2f5;
+    border-color: white;
+    font-weight: 700;
+}
+
+.auth-link:hover {
+    background-color: hsla(133, 74%, 41%, 0.788);
+}
+.auth-cadastro:hover {
+    background-color: lab(59.52% -59.7 57.9);
+}
+
+/* 3. Hero Section (Banner) */
+.hero-section {
+    /* Degradê do Azul para o Púrpura */
+    background: linear-gradient(135deg, #3498db, #8e44ad);
+    padding: 80px 20px;
+    text-align: center;
+    color: white;
+    margin-bottom: 40px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.hero-section h2 {
+    font-size: 3.2em;
+    margin-bottom: 10px;
+    font-weight: 900;
+    color: white; 
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.hero-section p {
+    font-size: 1.3em;
+    font-weight: 300;
+    max-width: 800px;
+    margin: 0 auto 30px;
+    opacity: 0.9;
+    color: #ecf0f1;
+}
+
+/* --- SEÇÃO DE DESTAQUE DO PIAUÍ --- */
+
+.piaui-destaque-section {
+    padding: 30px; 
+    text-align: center; 
+    margin-bottom: 40px;
+    background-color: var(--card-bg, white);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    max-width: 1280px;
+    margin: 0 auto 40px;
+}
+
+.piaui-destaque-title {
+    border-bottom-color: #2ecc71 !important; 
+    font-size: 1.8em !important; 
+    margin-bottom: 20px;
+}
+
+.piaui-destaque-subtitle {
+    color: var(--text-color); 
+    font-size: 1.1em; 
+    margin-bottom: 30px;
+}
+
+.piaui-destaque-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 20px;
+    padding: 0;
+}
+
+.piaui-destaque-card {
+    background-color: #f8f9fa;
+    padding: 25px; 
+    border-radius: 10px; 
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 200px;
+    transition: transform 0.3s;
+    border-top: 4px solid var(--primary-color); 
+}
+
+.piaui-destaque-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+}
+
+.piaui-destaque-card h4 {
+    color: var(--primary-color);
+}
+
+.piaui-destaque-card p {
+    color: #777; 
+    font-size: 0.95em;
+    flex-grow: 1;
+}
+
+/* Estilos dos Botões de Destaque */
+.destaque-button {
+    display: block;
+    text-align: center;
+    border: none;
+    margin-top: auto;
+    font-weight: 700;
+    font-size: 1em;
+    padding: 10px 18px; 
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.1s;
+    text-decoration: none;
+    color: white !important;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
+}
+
+.destaque-button:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
+/* Cores específicas dos botões */
+.campus-party-btn {
+    background-color: #e74c3c; /* Vermelho/Laranja */
+}
+.nordeste-tech-btn {
+    background-color: #3498db; /* Azul Intenso */
+}
+.startup-piaui-btn {
+    background-color: #9b59b6; /* Roxo */
+}
+
+
+/* 4. Conteúdo Principal e Título (Feed de Eventos) - COM CENTRALIZAÇÃO */
+.feed-main-content {
+    max-width: 1280px; 
+    margin: 0 auto; /* Centraliza o bloco principal */
+    padding: 0 30px 60px;
+}
+
+.section-title {
+    text-align: center; 
+    color: var(--text-color);
+    margin-top: 0;
+    margin-bottom: 40px;
+    font-size: 2.2em;
+    font-weight: 800;
+    border-bottom: 3px solid var(--secondary-color);
+    /* Centralização perfeita para título e borda */
+    display: block; 
+    width: fit-content; /* Largura ajustada ao texto */
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 5px;
+}
+
+.feed-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 35px;
+}
+
+.loading, .error-message, .no-events {
+    text-align: center;
+    grid-column: 1 / -1; 
+    padding: 20px;
+    color: var(--text-color);
+    font-size: 1.2em;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .feed-header-login, .auth-links {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .hero-section {
+        padding: 60px 20px;
+    }
+    .hero-section h2 {
+        font-size: 2.5em;
+    }
+    .piaui-destaque-section {
+        padding: 20px;
+    }
+}

@@ -1,0 +1,111 @@
+/* frontend/src/styles/CardEvento.css (DETALHADO E CHAMATIVO) */
+
+.card-evento {
+    background-color: var(--card-bg, white);
+    border-radius: 15px; /* Mais arredondado */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px; /* Mais padding */
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    /* Borda lateral fina, mas com cor vibrante */
+    border-left: 5px solid var(--secondary-color, #ffc107); 
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-evento:hover {
+    transform: translateY(-10px); /* Levanta mais */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    /* Efeito de brilho sutil */
+    border-left-color: var(--primary-color, #6a0dad); 
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.card-title {
+    color: var(--text-color);
+    margin: 0;
+    font-size: 1.6em; 
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+/* Badge (Preço) */
+.status-badge {
+    padding: 8px 16px;
+    border-radius: 5px; 
+    font-size: 0.9em;
+    font-weight: 700;
+    color: white;
+    background-color: #3498db; /* Azul para destaque neutro */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.status-badge.gratuito {
+    background-color: #2ecc71; /* Verde forte */
+}
+
+.status-badge.pago {
+    background-color: #e74c3c; /* Vermelho/Laranja */
+}
+
+.card-organizador {
+    font-size: 1em;
+    color: #7f8c8d;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border-bottom: 1px dashed #ecf0f1;
+    padding-bottom: 10px;
+}
+
+.card-details p {
+    margin: 12px 0; /* Mais espaçamento */
+    font-size: 1em;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+}
+
+.detail-icon {
+    font-size: 1.3em;
+    margin-right: 12px;
+    color: var(--primary-color);
+}
+
+/* Rodapé: Progresso de Vagas */
+.card-footer {
+    border-top: 1px solid #e0e0e0;
+    padding-top: 15px;
+    margin-top: auto; 
+}
+
+.inscritos-text {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95em;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.progress-bar {
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    height: 12px; /* Barra mais grossa */
+}
+
+.progress-fill {
+    height: 100%;
+    /* Cor vibrante do progresso */
+    background-color: #3498db; 
+    border-radius: 10px 0 0 10px; 
+    transition: width 0.5s ease-in-out;
+}

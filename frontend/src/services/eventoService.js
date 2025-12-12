@@ -13,7 +13,7 @@ export const createEvent = async (eventData) => {
     const token = getToken();
 
     if (!token) {
-        throw new Error('Usuário não autenticado. Faça login como Organizador.');
+        throw new new Error('Usuário não autenticado. Faça login como Organizador.');
     }
 
     const response = await fetch(API_URL, {
@@ -35,7 +35,7 @@ export const createEvent = async (eventData) => {
 };
 
 /**
- * Lista todos os eventos disponíveis para inscrição.
+ * Lista todos os eventos disponíveis (geralmente usada por usuários logados).
  * @returns {Array} Lista de eventos.
  */
 export const listAllAvailableEvents = async () => {
@@ -44,6 +44,8 @@ export const listAllAvailableEvents = async () => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
+                // Se esta rota for protegida, adicione o token aqui: 
+                // 'Authorization': `Bearer ${getToken()}`, 
             },
         });
 
@@ -61,9 +63,40 @@ export const listAllAvailableEvents = async () => {
     }
 };
 
+
+// 🛑 FUNÇÃO ADICIONADA PARA O FEED PÚBLICO
+/**
+ * Lista eventos disponíveis publicamente (Não requer autenticação).
+ * Endpoint sugerido: GET /api/eventos/publico
+ * @returns {Array} Lista de eventos públicos.
+ */
+export const listPublicEvents = async () => {
+    try {
+        // Assume que o endpoint público é /api/eventos/publico
+        const response = await fetch(`${API_URL}/publico`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            // Erro 404/500 se o backend não estiver rodando ou o endpoint não existir
+            throw new Error(errorData.message || 'Falha ao buscar o feed público. O backend está rodando?');
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Erro no serviço ao buscar eventos públicos:", error);
+        throw error;
+    }
+};
+
+
 /**
  * Registra o usuário logado em um evento específico.
- * 🛑 FUNÇÃO ADICIONADA PARA INSCRIÇÃO
  * @param {string} eventId - O ID do evento no qual o usuário quer se inscrever.
  * @returns {object} Confirmação de sucesso da inscrição.
  */

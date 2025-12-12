@@ -5,6 +5,7 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 
 // PARTICIPANTE
+import HomeFeed from "./pages/participante/HomeFeed";
 import ParticipanteHome from "./pages/participante/ParticipanteHome";
 import Perfil from "./pages/participante/Perfil";
 import InscreverEvento from "./pages/participante/InscreverEvento";
@@ -32,7 +33,7 @@ export default function App() {
         <Route path="/register" element={<Register />} />
 
         {/* ROTAS DO PARTICIPANTE */}
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<HomeFeed />} />
         <Route path="/home" element={<ParticipanteHome />} />
         <Route path="/perfil" element={<Perfil />} />
         <Route path="/inscrever" element={<InscreverEvento />} />
