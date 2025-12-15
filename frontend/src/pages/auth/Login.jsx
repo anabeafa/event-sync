@@ -1,4 +1,4 @@
-// frontend/src/pages/Login.jsx 
+
 
 import { useNavigate, Link } from "react-router-dom"; 
 import { useState } from "react";
@@ -28,15 +28,14 @@ export default function Login() {
       
       alert(response.message || "Login realizado com sucesso!");
       
-      // LÓGICA CRÍTICA DE REDIRECIONAMENTO CORRIGIDA E ROBUSTA
-      // Pega o 'role' que agora vem corretamente do Back-end
+    
       const userRole = response.user.role ? response.user.role.toUpperCase() : '';
       
       if (userRole === 'ORGANIZADOR') {
-        // Redireciona para o painel do organizador
+    
         navigate("/organizador/criarevento"); 
       } else {
-        // Redireciona para a home do participante
+
         navigate("/home"); 
       }
 
@@ -49,17 +48,15 @@ export default function Login() {
   return (
     <div className="split-container"> 
       
-      {/* PAINEL ESQUERDO: Título e Enfeites */}
+ 
       <div className="left-panel">
         <h1 className="main-title">EVENTSYNC</h1>
-        
-        {/* CORREÇÃO DA COR: Usando estilo inline para garantir o branco */}
+
         <h2 className="subtitle" style={{ color: 'white' }}>Entre e Gerencie Seus Eventos.</h2>
         
         <div className="decoration-line"></div>
       </div>
 
-      {/* PAINEL DIREITO: Formulário de Login */}
       <div className="right-panel">
         <div className="register-card">
           <h2>Acesso à Conta</h2>

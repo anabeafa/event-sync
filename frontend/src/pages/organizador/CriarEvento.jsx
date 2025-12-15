@@ -1,11 +1,8 @@
-// frontend/src/pages/organizador/CriarEvento.jsx
 
 import React, { useState } from 'react';
 import LayoutOrganizador from './LayoutOrganizador'; 
 import { createEvent } from '../../services/eventoService'; 
 import { useNavigate } from 'react-router-dom'; 
-
-// 🛑 IMPORTAR O CSS (Certifique-se que o caminho '.../styles/CriarEvento.css' está correto!)
 import '../../styles/CriarEvento.css'; 
 
 const CriarEvento = () => {
@@ -13,7 +10,7 @@ const CriarEvento = () => {
     const [tipoEvento, setTipoEvento] = useState('gratuito'); 
     const [exigeAprovacao, setExigeAprovacao] = useState(false);
     
-    // 1. STATE: Para armazenar todos os dados do formulário
+   
     const [formData, setFormData] = useState({
         title: '',
         location: '',
@@ -26,8 +23,6 @@ const CriarEvento = () => {
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
 
-
-    // 2. Função genérica para capturar a mudança em qualquer input
     const handleChange = (e) => {
         const { id, value, type, checked } = e.target;
         
@@ -37,13 +32,11 @@ const CriarEvento = () => {
         }));
     };
 
-    // 3. Conexão com o Back-end
     const handleSubmit = async (e) => {
         e.preventDefault();
         setMessage('');
         setError('');
         
-        // Dados que o Back-end (CriarEvento) espera
         const eventDataToAPI = {
             title: formData.title,
             description: formData.description || 'Nenhuma descrição fornecida.', 
@@ -57,14 +50,13 @@ const CriarEvento = () => {
             setMessage(`🎉 Evento "${response.event.title}" criado e salvo no Back-end!`);
             setError('');
             
-            // Limpa os campos essenciais após o sucesso
+        
             setFormData(prevData => ({
                 ...prevData,
                 title: '', description: '', date: '', location: '', valor: 0, pix: '',
             }));
             
-            // Opcional: Redirecionar
-            // setTimeout(() => navigate('/organizador/dashboard'), 2000); 
+          
 
         } catch (err) {
             console.error('Erro ao criar evento:', err.message);
@@ -75,14 +67,12 @@ const CriarEvento = () => {
 
     return (
         <LayoutOrganizador activePage="eventos">
-            {/* 🛑 CONTAINER PRINCIPAL COM ESTILO */}
+            
             <div className="criar-evento-container"> 
-                <div className="evento-form"> {/* Wrapper que será o "card" do formulário */}
+                <div className="evento-form"> 
 
                     <h1>Criar Novo Evento</h1>
                     <span className="subtitle">Detalhes, regras e logística do evento.</span>
-
-                    {/* Mensagens de feedback com classes CSS */}
                     {message && <p className="feedback-message success">{message}</p>}
                     {error && <p className="feedback-message error">Erro: {error}</p>}
 
@@ -93,8 +83,6 @@ const CriarEvento = () => {
                             <label htmlFor="title">Título</label>
                             <input type="text" id="title" value={formData.title} onChange={handleChange} placeholder="Ex: Conferência Anual de Tecnologia" required />
                         </div>
-                        
-                        {/* CAMPO DE DESCRIÇÃO (ADICIONADO ANTERIORMENTE) */}
                         <div className="form-group">
                             <label htmlFor="description">Descrição do Evento</label>
                             <textarea 

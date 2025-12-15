@@ -1,9 +1,3 @@
-// backend/src/domain/Evento.js
-
-/**
- * Entidade de domínio Evento. 
- * Representa um evento na aplicação com suas propriedades essenciais.
- */
 export class Evento {
     constructor(id, title, description, date, location, organizadorId, createdAt, updatedAt) {
         this.id = id;
