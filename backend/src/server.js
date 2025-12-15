@@ -4,11 +4,11 @@ dotenv.config();
 import express from 'express';
 import cors from 'cors';
 
+
 import { PrismaClient } from '@prisma/client'; 
 
+
 import { PrismaUserRepository } from './infra/PrismaUserRepository.js'; 
-
-
 import authRoutesFactory from "./routes/auth.routes.js";
 import eventRoutesFactory from "./routes/event.routes.js"; 
 import inscricaoRoutesFactory from "./routes/inscricao.routes.js";
@@ -18,25 +18,29 @@ const prisma = new PrismaClient();
 
 const app = express();
 
+
 app.use(cors());
 app.use(express.json());
 
 async function connectDB() {
     try {
         await prisma.$connect();
-        console.log("Conectado ao banco de dados (SQLite) via Prisma!");
+        console.log("Conectado ao banco de dados via Prisma!"); 
     } catch (e) {
         console.error("Falha Crítica ao conectar ao banco de dados:", e.message);
-        console.error("Verifique a DATABASE_URL no .env e o schema.prisma.");
+        console.error("Verifique a DATABASE_URL e o schema.prisma.");
+
         process.exit(1); 
     }
 }
 
 function initializeApp() {
     const userRepository = new PrismaUserRepository(prisma);
+    
     app.get("/", (req, res) => {
         res.json({ message: "Backend EventSync funcionando!" });
     });
+
     app.use("/auth", authRoutesFactory(prisma, userRepository)); 
     app.use("/api/eventos", eventRoutesFactory(prisma, userRepository)); 
     app.use("/api/inscricoes", inscricaoRoutesFactory(prisma, userRepository)); 
@@ -46,8 +50,11 @@ function initializeApp() {
 }
 
 const PORT = process.env.PORT || 3000;
+
+
 async function startServer() {
     await connectDB(); 
+    
     initializeApp();
     
     app.listen(PORT, () => {
@@ -56,7 +63,9 @@ async function startServer() {
     });
 }
 
+
 startServer();
+
 
 process.on('SIGINT', async () => {
     await prisma.$disconnect();
