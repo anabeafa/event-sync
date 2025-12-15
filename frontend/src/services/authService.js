@@ -1,7 +1,7 @@
 
 
-const API_URL = "http://localhost:3000/auth";
-
+//const API_URL = "http://localhost:3000/auth";
+const API_URL = "https://event-sync-7esa.onrender.com/auth";
 
 const saveUserData = (data) => {
    
